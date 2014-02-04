@@ -1,30 +1,156 @@
 extends layout
 
 block content
-	h1 Iteration #0 - Peer Evaluation
+	h1 SENG403 - Iteration #0 - Peer Evaluation
 	div
+		p You must fill the following form with a letter grade assessment of each (including yourself) of your group members' contributions to the current assignment (Iteration 0) together with a 1/3 page-length description of that person's contribution justifying your assessment. <strong><u>It is not acceptable to give everyone in your group an A or to give everyone in your group an F. A report that does not reflect the dynamics of the group will be considered a failure, which could cause you to fail the course.</u></strong> It is your responsibility to get to know your group members and know their contributions to the project.
 		//h2 You are logged as {Mary Ann}
+	
 	div.newEvaluation
 		form(method="post")
 			div
-				h3 Evaluation
+				h2 Evaluation
 				div
-					span.label Group :
-					- var groupOptions = {"1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9","10":"10"}
-					select(name="group", id="group")
+					span.label Your Full Name :
+					input(type="text", name="evaluator", id="evaluator")
+				div
+					span.label Your UCID :
+					input(type="text", name="ucid", id="ucid")
+				div
+					span.label Group Number :
+					- var groupOptions = {"1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9"}
+					select(name="groupNumber", id="groupNumber")
 						each option, key in groupOptions
 							option(value=key) #{option}
+
+				
+				// OH GOD, WHY?!
+				//TEAM 1
+				h3 Team Member 1
 				div
-					span.label Team member to be evaluated :
-					input(type="text", name="teamMember", id="teamMember")
+					span.label Your Name :
+					input(type="text", name="teamMember1", id="teamMember1")
 				div
 					span.label Grade :
 					- var options = {"A+": "A+", "A": "A", "A-": "A-", "B+": "B+", "B": "B", "B-": "B-", "C+":"C+", "C":"C", "C-":"C-", "D+":"D+", "D":"D", "D-":"D-", "F":"F"}
-					select(name="memberGrade", id="memberGrade")
+					select(name="memberGrade1", id="memberGrade1")
 						each option, key in options
 							option(value=key) #{option}
 				div
 					span.label Comments :
-					textarea(type="text", name="comment", id="comment")
+					textarea(type="text", name="comment1", id="comment1")
+				
+				
+				//TEAM 2
+				h3 Team Member 2
+				div
+					span.label Team Member Name :
+					input(type="text", name="teamMember2", id="teamMember2")
+				div
+					span.label Grade :
+					- var options = {"A+": "A+", "A": "A", "A-": "A-", "B+": "B+", "B": "B", "B-": "B-", "C+":"C+", "C":"C", "C-":"C-", "D+":"D+", "D":"D", "D-":"D-", "F":"F"}
+					select(name="memberGrade2", id="memberGrade2")
+						each option, key in options
+							option(value=key) #{option}
+				div
+					span.label Comments :
+					textarea(type="text", name="comment2", id="comment2")
+					
+					
+				// TEAM 3
+				h3 Team Member 3
+				div
+					span.label Team Member Name :
+					input(type="text", name="teamMember3", id="teamMember3")
+				div
+					span.label Grade :
+					- var options = {"A+": "A+", "A": "A", "A-": "A-", "B+": "B+", "B": "B", "B-": "B-", "C+":"C+", "C":"C", "C-":"C-", "D+":"D+", "D":"D", "D-":"D-", "F":"F"}
+					select(name="memberGrade3", id="memberGrade3")
+						each option, key in options
+							option(value=key) #{option}
+				div
+					span.label Comments :
+					textarea(type="text", name="comment3", id="comment3")
+				
+				// TEAM 4
+				h3 Team Member 4
+				div
+					span.label Team Member Name :
+					input(type="text", name="teamMember4", id="teamMember4")
+				div
+					span.label Grade :
+					- var options = {"A+": "A+", "A": "A", "A-": "A-", "B+": "B+", "B": "B", "B-": "B-", "C+":"C+", "C":"C", "C-":"C-", "D+":"D+", "D":"D", "D-":"D-", "F":"F"}
+					select(name="memberGrade4", id="memberGrade4")
+						each option, key in options
+							option(value=key) #{option}
+				div
+					span.label Comments :
+					textarea(type="text", name="comment4", id="comment4")
+					
+				
+				// TEAM 5
+				h3 Team Member 5
+				div
+					span.label Team Member Name :
+					input(type="text", name="teamMember5", id="teamMember5")
+				div
+					span.label Grade :
+					- var options = {"A+": "A+", "A": "A", "A-": "A-", "B+": "B+", "B": "B", "B-": "B-", "C+":"C+", "C":"C", "C-":"C-", "D+":"D+", "D":"D", "D-":"D-", "F":"F"}
+					select(name="memberGrade5", id="memberGrade5")
+						each option, key in options
+							option(value=key) #{option}
+				div
+					span.label Comments :
+					textarea(type="text", name="comment5", id="comment5")
+					
+				// TEAM 6
+				h3 Team Member 6
+				div
+					span.label Team Member Name :
+					input(type="text", name="teamMember6", id="teamMember6")
+				div
+					span.label Grade :
+					- var options = {"A+": "A+", "A": "A", "A-": "A-", "B+": "B+", "B": "B", "B-": "B-", "C+":"C+", "C":"C", "C-":"C-", "D+":"D+", "D":"D", "D-":"D-", "F":"F"}
+					select(name="memberGrade6", id="memberGrade6")
+						each option, key in options
+							option(value=key) #{option}
+				div
+					span.label Comments :
+					textarea(type="text", name="comment6", id="comment6")
+					
+				// TEAM 7
+				h3 Team Member 7
+				div
+					span.label Team Member Name :
+					input(type="text", name="teamMember7", id="teamMember7")
+				div
+					span.label Grade :
+					- var options = {"A+": "A+", "A": "A", "A-": "A-", "B+": "B+", "B": "B", "B-": "B-", "C+":"C+", "C":"C", "C-":"C-", "D+":"D+", "D":"D", "D-":"D-", "F":"F"}
+					select(name="memberGrade7", id="memberGrade7")
+						each option, key in options
+							option(value=key) #{option}
+				div
+					span.label Comments :
+					textarea(type="text", name="comment7", id="comment7")
+				
+				// TEAM 8
+				h3 Team Member 8
+				div
+					span.label Team Member Name :
+					input(type="text", name="teamMember8", id="teamMember8")
+				div
+					span.label Grade :
+					- var options = {"A+": "A+", "A": "A", "A-": "A-", "B+": "B+", "B": "B", "B-": "B-", "C+":"C+", "C":"C", "C-":"C-", "D+":"D+", "D":"D", "D-":"D-", "F":"F"}
+					select(name="memberGrade8", id="memberGrade8")
+						each option, key in options
+							option(value=key) #{option}
+				div
+					span.label Comments :
+					textarea(type="text", name="comment8", id="comment8")
+					
+					
+					
 				div#editEvaluationSubmit
 					input(type="submit", value="Submit")
+	
+	p <center>If you're having problems to submit your peer evaluation or have any suggestions/questions, please send an email to fm.rodrigues@ucalgary.ca</center>
