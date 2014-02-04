@@ -61,6 +61,7 @@ app.post('/evaluation/new', function(req, res){
 			ucid:req.param('ucid'),
 			evaluator:req.param('evaluator'),
 			group:req.param('groupNumber'),
+			evaluatorEmail:req.param('evaluatorEmail'),
 			
 			teamMember1:req.param('teamMember1'),
 			grade1:req.param('memberGrade1'),
