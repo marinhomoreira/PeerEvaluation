@@ -1,0 +1,30 @@
+extends layout
+
+block content
+	h1 Iteration #0 - Peer Evaluation
+	div
+		//h2 You are logged as {Mary Ann}
+	div.newEvaluation
+		form(method="post")
+			div
+				h3 Evaluation
+				div
+					span.label Group :
+					- var groupOptions = {"1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9","10":"10"}
+					select(name="group", id="group")
+						each option, key in groupOptions
+							option(value=key) #{option}
+				div
+					span.label Team member to be evaluated :
+					input(type="text", name="teamMember", id="teamMember")
+				div
+					span.label Grade :
+					- var options = {"A+": "A+", "A": "A", "A-": "A-", "B+": "B+", "B": "B", "B-": "B-", "C+":"C+", "C":"C", "C-":"C-", "D+":"D+", "D":"D", "D-":"D-", "F":"F"}
+					select(name="memberGrade", id="memberGrade")
+						each option, key in options
+							option(value=key) #{option}
+				div
+					span.label Comments :
+					textarea(type="text", name="comment", id="comment")
+				div#editEvaluationSubmit
+					input(type="submit", value="Submit")

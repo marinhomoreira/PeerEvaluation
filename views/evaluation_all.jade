@@ -1,0 +1,22 @@
+extends layout
+
+block content
+	h1= title
+	#evaluations
+		table
+			thead
+				tr
+					th Date
+					th Person Evaluated
+					th Grade
+					th Comment
+					th Evaluator
+			tbody
+				- each evaluation in evaluations
+					tr
+						td #{evaluation.created_at}
+						td #{evaluation.evaluated}
+						td #{evaluation.grade}
+						td #{evaluation.comment}
+						td #{evaluation.ucid}
+		a(href="/evaluation/new")!= "New Evaluation"
