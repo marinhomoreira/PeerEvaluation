@@ -3,16 +3,42 @@ extends layout
 block content
 	h1= title
 	a(href="/evaluation/new")!= "New Evaluation"
-	#evaluations
+	p= evaluations.length +" submissions"
+	
+	.evaluations
+		//- each evaluations in groupEvaluations
 		table
 			thead
 				tr
 					th 
 					
 			tbody
+				- var rowNumber = 0
+				tr
+					- each evaluation in evaluations
+						td
+							- rowNumber = rowNumber+1
+							//p #{rowNumber}
+							- each value, key in evaluation
+								p <strong>#{key}:</strong> #{value}
+								//p #{value}
+
+	h1 Excel-Friendly
+	.evaluations
+		//- each evaluations in groupEvaluations
+		table
+			thead
+				tr
+					th 
+					
+			tbody
+				- var rowNumber = 0
 				- each evaluation in evaluations
 					tr
-						td 
-							ul
-								- each value, key in evaluation
-									li #{key}: #{value}
+						td
+							- rowNumber = rowNumber+1
+							//p #{rowNumber}
+						- each value, key in evaluation
+							td
+								//p <strong>#{key}:</strong> #{value}
+								p #{value}

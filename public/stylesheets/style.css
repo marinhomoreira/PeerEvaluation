@@ -17,7 +17,7 @@ h2 {
 }
 h1 {
   text-shadow: 1px 2px 2px #ddd;
-  font-size: 60px;
+  font-size: 40px;
 }
 /* NEW EVALUATION FORM */
 .newEvaluation {
@@ -70,22 +70,26 @@ h4 {
   float: left;
 }
 /* EVALUATIONS */
-#evaluations {
+.evaluations {
   text-align: left;
   margin-left: auto;
   margin-right: auto;
-  width: 320px;
 }
-#evaluations .evaluation {
+.evaluations td {
+  border: 1px #000 solid;
+  min-width: 200px;
+  vertical-align: top;
+}
+.evaluations .evaluation {
   margin: 20px;
 }
-#evaluations .evaluation .created_at {
+.evaluations .created_at {
   display: none;
 }
-#evaluations .evaluation .title {
+.evaluations .title {
   font-weight: bold;
   background-color: #eee;
 }
-#evaluations .evaluation .name {
+.evaluations .name {
   background-color: #ffa;
 }
