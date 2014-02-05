@@ -152,6 +152,21 @@ block content
 					textarea(type="text", name="comment8", id="comment8")
 					
 					
+				// TEAM 9
+				h3 Team Member 9
+				div
+					span.label Team Member Name :
+					input(type="text", name="teamMember9", id="teamMember9")
+				div
+					span.label Grade :
+					- var options = {"A+": "A+", "A": "A", "A-": "A-", "B+": "B+", "B": "B", "B-": "B-", "C+":"C+", "C":"C", "C-":"C-", "D+":"D+", "D":"D", "D-":"D-", "F":"F"}
+					select(name="memberGrade9", id="memberGrade9")
+						each option, key in options
+							option(value=key) #{option}
+				div
+					span.label Comments :
+					textarea(type="text", name="comment9", id="comment9")
+					
 					
 				div#editEvaluationSubmit
 					input(type="submit", value="Submit")

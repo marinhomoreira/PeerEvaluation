@@ -95,6 +95,10 @@ app.post('/evaluation/new', function(req, res){
 			grade8:req.param('memberGrade8'),
 			comment8:req.param('comment8'),
 			
+			teamMember9:req.param('teamMember9'),
+			grade9:req.param('memberGrade9'),
+			comment9:req.param('comment9'),
+			
 	}, function( error, docs) {
 		res.redirect('/')
 	});
