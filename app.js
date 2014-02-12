@@ -9,11 +9,12 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var EvaluationProvider = require('./evaluationprovider').EvaluationProvider;
+var StudentProvider = require('./studentprovider').StudentProvider;
 
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3002);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
@@ -31,6 +32,7 @@ if ('development' == app.get('env')) {
 }
 
 var evaluationProvider = new EvaluationProvider('localhost', 27017);
+var studentProvider = new StudentProvider('localhost', 27017);
 
 //Routes
 //TODO: Fake LOGIN
@@ -164,6 +166,42 @@ app.post('/evaluation/new', function(req, res){
 		res.redirect('/')
 	});
 });
+
+
+
+// list all students
+app.get('/student/all', function(req, res){
+	studentProvider.findAll(function(error, svals){
+		res.render('student_all', {
+			title: 'Students',
+			students:svals
+		});
+	});
+});
+
+app.get('/student/new', function(req, res) {
+    studentProvider.save({
+			ucid:"123456",
+			name:"John Smith",
+			group:[{
+				number:"5",
+				type:"supplier",
+				evaluations:[],
+			}],
+			email:"john@smith.com",
+
+			teamMember1:"Mary Ann",
+			grade1:"A+",
+			comment1:"She worked a lot.",
+			
+		}, function( error, docs) {
+			res.redirect('/student/all')
+		});
+	
+});
+
+
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
