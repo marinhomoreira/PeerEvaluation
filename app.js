@@ -41,6 +41,7 @@ app.get('/', routes.index);
 	
 // list all evaluations
 app.get('/evaluation/all', function(req, res){
+	logRequest(req);
 	evaluationProvider.findAll(function(error, evals){
 		res.render('evaluation_all', {
 			title: 'Evaluations',
@@ -50,13 +51,15 @@ app.get('/evaluation/all', function(req, res){
 });
 
 app.get('/evaluation/new', function(req, res) {
-    res.render('evaluation_new', {
+    logRequest(req);
+	res.render('evaluation_new', {
         title: 'New Peer Evaluation'
     });
 });
 
 //save new evaluation
 app.post('/evaluation/new', function(req, res){
+	logRequest(req);
 	evaluationProvider.save({
 			iteration:0,
 	
@@ -182,30 +185,27 @@ app.get('/student/all', function(req, res){
 
 app.get('/student/new', function(req, res) {
 	logRequest(req);
-	//console.log(res);
-	// TODO: REMOVE THIS!
-    studentProvider.save({
-			ucid:"123456",
-			name:"John Smith",
-			group:[{
-				number:"5",
-				type:"supplier",
-				evaluations:[],
-			}],
-			email:"john@smith.com",
-
-			teamMember1:"Mary Ann",
-			grade1:"A+",
-			comment1:"She worked a lot.",
-			
-		}, function( error, docs) {
-			res.redirect('/student/all')
-		});
-	
+	res.render('student_new', {
+        title: 'New Student'
+    });
 });
 
 
-
+app.post('/student/new', function(req,res){
+	logRequest(req);
+    studentProvider.save({
+			ucid:req.param('ucid'),
+			email:req.param('email'),
+			name:req.param('name'),
+			group:[{
+				number:req.param('groupNumber'),
+				type:req.param('groupType'),
+				evaluations:[],
+			}],
+		}, function( error, docs) {
+			res.redirect('/student/all')
+		});
+});
 
 Date.prototype.format = function(format) //author: meizz
 {
