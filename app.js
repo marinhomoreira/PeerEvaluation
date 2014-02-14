@@ -3,6 +3,8 @@
  * Module dependencies.
  */
 
+require('./db');
+ 
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -10,6 +12,7 @@ var http = require('http');
 var path = require('path');
 var EvaluationProvider = require('./evaluationprovider').EvaluationProvider;
 var StudentProvider = require('./studentprovider').StudentProvider;
+var student = require('./routes/student');
 
 var app = express();
 
@@ -31,13 +34,25 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+app.configure(function(){
+	app.use(express.bodyParser());
+});
+
 var evaluationProvider = new EvaluationProvider('localhost', 27017);
 var studentProvider = new StudentProvider('localhost', 27017);
 
-//Routes
-//TODO: Fake LOGIN
-app.get('/', routes.index);
+// NEW ROUTES
+app.get('/student', student.list);
+app.get('/student/all', student.list);
+app.get('/student/new', student.create);
+app.post('/student/save', student.save); // TODO Group?
+app.get('/student/:ucid', student.find);
 
+app.get('/student/all/:type/:group', student.findByGroupTypeAndNumber);
+
+
+//DEPRECATED ROUTES
+app.get('/', routes.index);
 	
 // list all evaluations
 app.get('/evaluation/all', function(req, res){
@@ -50,16 +65,32 @@ app.get('/evaluation/all', function(req, res){
 	});
 });
 
-app.get('/evaluation/new', function(req, res) {
+app.get('/evaluation/new/:ucid/:type/:group', function(req, res) {
     logRequest(req);
-	res.render('evaluation_new', {
-        title: 'New Peer Evaluation'
-    });
+	// TODO : PROBLEM! not populating this.
+	var evalStudent = [];
+	studentProvider.findByUCID(req.params.ucid, function(error, svals){
+		// TODO: Verification of this!
+		evalStudent = svals[0];
+	});
+	//console.log(evalStudent);
+	
+	studentProvider.findAllByGroupAndType({number: req.params.group, type: req.params.type}, function(error, svals){
+		res.render('evaluation_new', {
+			evaluator:evalStudent,
+			students:svals
+		});
+		console.log(svals);
+	});
+	
 });
 
 //save new evaluation
-app.post('/evaluation/new', function(req, res){
+app.post('/evaluation/new/:ucid/:type/:group', function(req, res){
 	logRequest(req);
+	console.log(req.body);
+	// TODO: HOW TO  POPULATE?!
+	/*
 	evaluationProvider.save({
 			iteration:0,
 	
@@ -168,47 +199,12 @@ app.post('/evaluation/new', function(req, res){
 		});
 		res.redirect('/')
 	});
-});
-
-
-
-// list all students
-app.get('/student/all', function(req, res){
-	logRequest(req);
-	studentProvider.findAll(function(error, svals){
-		res.render('student_all', {
-			title: 'Students',
-			students:svals
-		});
+*/
 	});
-});
-
-app.get('/student/new', function(req, res) {
-	logRequest(req);
-	res.render('student_new', {
-        title: 'New Student'
-    });
-});
 
 
-app.post('/student/new', function(req,res){
-	logRequest(req);
-    studentProvider.save({
-			ucid:req.param('ucid'),
-			email:req.param('email'),
-			name:req.param('name'),
-			group:[{
-				number:req.param('groupNumber'),
-				type:req.param('groupType'),
-				evaluations:[],
-			}],
-		}, function( error, docs) {
-			res.redirect('/student/all')
-		});
-});
-
-Date.prototype.format = function(format) //author: meizz
-{
+Date.prototype.format = function(format) {
+//author: meizz
   var o = {
     "M+" : this.getMonth()+1, //month
     "d+" : this.getDate(),    //day

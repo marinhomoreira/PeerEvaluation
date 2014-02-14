@@ -15,10 +15,9 @@ block content
 				tr
 					- each student in students
 						td
-							- rowNumber = rowNumber+1
+							#{student}
+							//- rowNumber = rowNumber+1
 							//p #{rowNumber}
-							- each value, key in student
-								p <strong>#{key}:</strong> #{value}
+							//- each value, key in student
+								//p <strong>#{key}:</strong> #{value}
 								//p #{value}
-
-		

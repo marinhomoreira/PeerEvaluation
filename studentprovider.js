@@ -108,5 +108,45 @@ StudentProvider.prototype.findAll = function(callback) {
     });
 };
 
+//find all students by group
+StudentProvider.prototype.findAllByGroupAndType = function(group, callback) {
+    this.getCollection(function(error, student_collection) {
+      if( error ) callback(error)
+      else {
+        student_collection.find({'group.number':group.number, 'group.type':group.type}).toArray(function(error, results) {
+          if( error ) callback(error)
+          else callback(null, results)
+        });
+      }
+    });
+};
+
+//find student by UCID
+StudentProvider.prototype.findByUCID = function(ucid, callback) {
+    this.getCollection(function(error, student_collection) {
+      if( error ) callback(error)
+      else {
+        student_collection.find({'ucid':ucid}).toArray(function(error, results) {
+          if( error ) callback(error)
+          else callback(null, results)
+        });
+      }
+    });
+};
+
+StudentProvider.prototype.findByEvaluation = function(ucid, callback) {
+    this.getCollection(function(error, student_collection) {
+      if( error ) callback(error)
+      else {
+        student_collection.find({'ucid':ucid}).toArray(function(error, results) {
+          if( error ) callback(error)
+          else callback(null, results)
+        });
+      }
+    });
+};
+
+
+
 //module.exports = StudentProvider;
 exports.StudentProvider = StudentProvider;
