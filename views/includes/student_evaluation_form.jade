@@ -1,0 +1,22 @@
+div.newEvaluation
+	form(method="post")
+		div
+			//- CHANGE THE WAY ITERATION AND EVALUATOR ARE BEING SET
+			input(type="hidden", value="1", name="evaluations[iteration]", id="iteration")
+
+			h2 Evaluator: #{evaluator.name}
+			- each student, key in students
+				h3 #{student.name}
+				div
+					span.label Grade :
+					- var options = {"A+": "A+", "A": "A", "A-": "A-", "B+": "B+", "B": "B", "B-": "B-", "C+":"C+", "C":"C", "C-":"C-", "D+":"D+", "D":"D", "F":"F"}
+					select(name="evaluations[#{student._id}][grade]", id="grade")
+						each option, key in options
+							option(value=key) #{option}
+				div
+					span.label Comments :
+					//textarea(type="text", name="evaluations[#{student._id}][comments]", id="comments" text="#{student.name}")
+					<textarea name="evaluations[#{student._id}][comments]" id="comments" cols="30" rows="5" class="form_text text-input shadow" title="Comment" onblur="if (this.innerHTML == '') {this.innerHTML = 'Comment';}" onfocus="if (this.innerHTML == 'Comment') {this.innerHTML = '';}">Comment</textarea>
+					
+			div#editEvaluationSubmit
+				input(type="submit", value="Submit")

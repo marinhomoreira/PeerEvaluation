@@ -1,0 +1,25 @@
+
+div.newEvaluation
+	if message
+		h2 #{message}
+	form(method="post", action="/user/authenticate")
+		div
+			div
+				span.label UCID :
+				input(type="text", name="ucid")
+			div
+				span.label email :
+				input(type="text", name="email")
+			div
+				span.label Project :
+				input(type="radio" name="project" value="Supplier" checked=true)
+				| Supplier
+				br
+				input(type="radio", name="project", value="Paper", checked=false)
+				| Paper
+
+			//-div
+				//-input(type="checkbox", name="rememberme")
+				//-span.label Remember Me
+			div#editEvaluationSubmit
+				input(type="submit", value="New Evaluation")
