@@ -30,7 +30,7 @@ exports.create = function(req, res) {
 	res.render('student_new');
 };
 
-exports.save = function ( req, res ){
+exports.save = function (req, res) {
 	logRequest(req);
 	var stu = new Student({
 		name : req.body.name,
@@ -62,5 +62,5 @@ exports.findByGroupTypeAndNumber = function(req, res) {
 
 
 function logRequest(req) {
-	console.log(new Date().format("yy-MM-dd h:mm:ss") +" "+ req.socket._peername.address + ":"+ req.socket._peername.port + " " + req.method + " " + req.url);
+	//console.log(new Date().format("yy-MM-dd h:mm:ss") +" "+ req.socket._peername.address + ":"+ req.socket._peername.port + " " + req.method + " " + req.url);
 }

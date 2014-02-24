@@ -27,11 +27,6 @@ var memberEvaluationSchema = Schema({
 	comments : String
 });
 
-/* var Student = mongoose.model('Student', studentSchema);
-var Group = mongoose.model('Group', groupSchema);
-var Evaluations = mongoose.model('Evaluations', evaluationSchema);
-var MemberEvaluation = mongoose.model('MemberEvaluation', memberEvaluationSchema);
- */
 mongoose.model('Student', studentSchema);
 mongoose.model('Group', groupSchema);
 mongoose.model('Evaluations', evaluationsSchema);

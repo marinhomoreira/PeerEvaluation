@@ -33,7 +33,7 @@ var StudentSkel = {
 StudentProvider = function(host, port) {
 	this.db = new Db('PeerEvaluationStudent',
 		new Server(
-			host, port, {safe: false},
+			host, port,
 			{auto_reconnect: true},
 			{}
 		)

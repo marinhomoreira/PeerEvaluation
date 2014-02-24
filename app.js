@@ -4,15 +4,19 @@
  */
 
 require('./db');
- 
+
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
+
 var http = require('http');
 var path = require('path');
 var EvaluationProvider = require('./evaluationprovider').EvaluationProvider;
 var StudentProvider = require('./studentprovider').StudentProvider;
+
+// ROUTES
+var user = require('./routes/user');
 var student = require('./routes/student');
+var evaluation = require('./routes/evaluation');
 
 var app = express();
 
@@ -22,6 +26,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
+//app.use(express.logger());
+app.use(express.cookieParser());
+app.use(express.session({ secret: 'keyboard cat' })); // CHANGE THIS!
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
@@ -41,7 +48,10 @@ app.configure(function(){
 var evaluationProvider = new EvaluationProvider('localhost', 27017);
 var studentProvider = new StudentProvider('localhost', 27017);
 
-// NEW ROUTES
+// TODO : ADD AUTHENTICATION FROM HERE!
+// ROUTES
+app.get('/', routes.index);
+
 app.get('/student', student.list);
 app.get('/student/all', student.list);
 app.get('/student/new', student.create);
@@ -50,10 +60,13 @@ app.get('/student/:ucid', student.find);
 
 app.get('/student/all/:type/:group', student.findByGroupTypeAndNumber);
 
+app.post('/user/authenticate', user.authenticate);
+
+app.get('/evaluation/new', evaluation.create);
 
 //DEPRECATED ROUTES
-app.get('/', routes.index);
-	
+
+
 // list all evaluations
 app.get('/evaluation/all', function(req, res){
 	logRequest(req);
@@ -64,7 +77,7 @@ app.get('/evaluation/all', function(req, res){
 		});
 	});
 });
-
+/*
 app.get('/evaluation/new/:ucid/:type/:group', function(req, res) {
     logRequest(req);
 	// TODO : PROBLEM! not populating this.
@@ -80,11 +93,11 @@ app.get('/evaluation/new/:ucid/:type/:group', function(req, res) {
 			evaluator:evalStudent,
 			students:svals
 		});
-		console.log(svals);
+		//console.log(svals);
 	});
 	
 });
-
+*/
 //save new evaluation
 app.post('/evaluation/new/:ucid/:type/:group', function(req, res){
 	logRequest(req);
@@ -202,6 +215,12 @@ app.post('/evaluation/new/:ucid/:type/:group', function(req, res){
 */
 	});
 
+
+app.get("*", function(request, response, next) {
+	//if it's not public, should be redirected to / or 404!
+  //response.redirect('/');
+	next();
+});
 
 Date.prototype.format = function(format) {
 //author: meizz

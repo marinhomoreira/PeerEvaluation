@@ -5,7 +5,7 @@ var BSON = require('mongodb').BSON;
 var ObjectID = require('mongodb').ObjectID;
 
 EvaluationProvider = function(host, port) {
-  this.db = new Db('node-mongo-evaluation', new Server(host, port, {safe: false}, {auto_reconnect: true}, {}));
+  this.db = new Db('node-mongo-evaluation', new Server(host, port, {safe: true}, {auto_reconnect: true}, {}));
   this.db.open(function(){});
 };
 
