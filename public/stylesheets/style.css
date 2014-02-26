@@ -21,8 +21,8 @@ h1 {
 }
 /* NEW EVALUATION FORM */
 .newEvaluation {
-  border: 2px;
-  border-color: #000;
+  border: 1px;
+  border-color: #808080;
   border-style: solid;
   width: 600px;
   margin-left: auto;

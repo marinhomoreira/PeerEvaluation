@@ -13,7 +13,6 @@ div.newEvaluation
 							option(value=key) #{option}
 				div
 					span.label Comments :
-					<textarea name="evaluations[#{student._id}][comments]" id="comments" cols="30" rows="5" class="form_text text-input shadow" title="Comments" onblur="if (this.innerHTML == '') {this.innerHTML = 'Comments';}" onfocus="if (this.innerHTML == 'Comments') {this.innerHTML = '';}">Comments about #{student.name} from #{evaluator.name}</textarea>
-					
+					<textarea name="evaluations[#{student._id}][comments]" id="comments" cols="30" rows="5" class="form_text text-input shadow" title="Comments" onblur="if (this.innerHTML == '') {this.innerHTML = 'Comments';}" onfocus="if (this.innerHTML == 'Comments') {this.innerHTML = '';}"></textarea>
 			div#editEvaluationSubmit
 				input(type="submit", value="Submit")
