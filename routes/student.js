@@ -3,7 +3,6 @@ var mongoose = require( 'mongoose' );
 var Student = mongoose.model('Student');
 var Group = mongoose.model('Group');
 var Evaluations = mongoose.model('Evaluations');
-var MemberEvaluation = mongoose.model('MemberEvaluation');
 
 exports.list = function(req, res){
 	logRequest(req);

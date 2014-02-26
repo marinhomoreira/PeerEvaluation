@@ -2,11 +2,56 @@ extends layout
 
 block content
 	h1= title
-	a(href="/evaluation/new")!= "New Evaluation"
+	//a(href="/evaluation/new")!= "New Evaluation"
 	p= evaluations.length +" submissions"
 	
+	h2 Excel-Friendly
 	.evaluations
-		//- each evaluations in groupEvaluations
+		table
+			thead
+				tr
+					th #
+					th Iteration
+					th Evaluator
+					th Email
+					th UCID
+					th Group Type
+					th Group Number
+					- for (var x = 0; x <9; x++)
+						th Team member
+						th Grade
+						th Comments
+					th Submission date
+					th Evaluation ID
+			tbody
+				- var rowNumber = 0
+				- each evaluation in evaluations
+					- var evaluator = evaluation._evaluator
+					- var group = evaluation._group
+					- var mEvals = evaluation.memberEvaluation
+					tr
+						td
+							- rowNumber = rowNumber+1
+							p #{rowNumber}
+						td #{evaluation.iteration}
+						td #{evaluator.name}
+						td #{evaluator.email}
+						td #{evaluator.ucid}
+						td #{group.type}
+						td #{group.number}
+						- each mEval in mEvals
+							td #{mEval._evaluated.name}
+							td #{mEval.grade}
+							td #{mEval.comments}
+						- for(var i = 0; i < (9-mEvals.length); i++)
+							td -
+							td -
+							td -
+						td #{evaluation.date}
+						td #{evaluation._id}
+	
+	h2 Play here				
+	.evaluations
 		table
 			thead
 				tr
@@ -16,29 +61,15 @@ block content
 				- var rowNumber = 0
 				tr
 					- each evaluation in evaluations
+						- var evaluator = evaluation._evaluator
+						- var group = evaluation._group
+						- var mEvals = evaluation.memberEvaluation
 						td
-							- rowNumber = rowNumber+1
-							//p #{rowNumber}
-							- each value, key in evaluation
-								p <strong>#{key}:</strong> #{value}
-								//p #{value}
-
-	h1 Excel-Friendly
-	.evaluations
-		//- each evaluations in groupEvaluations
-		table
-			thead
-				tr
-					th 
-					
-			tbody
-				- var rowNumber = 0
-				- each evaluation in evaluations
-					tr
-						td
-							- rowNumber = rowNumber+1
-							//p #{rowNumber}
-						- each value, key in evaluation
-							td
-								//p <strong>#{key}:</strong> #{value}
-								p #{value}
+							p Iteration #{evaluation.iteration}
+							p Submitted in #{evaluation.date}
+							p Evaluator #{evaluator.name}
+							p #{group.type} Project - Group #{group.number}
+							- each mEval in mEvals
+								p #{mEval._evaluated.name} #{mEval.grade}
+								p #{mEval.comments} 
+						

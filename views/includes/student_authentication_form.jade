@@ -12,14 +12,10 @@ div.newEvaluation
 				input(type="text", name="email")
 			div
 				span.label Project :
-				input(type="radio" name="project" value="Supplier" checked=true)
-				| Supplier
-				br
-				input(type="radio", name="project", value="Paper", checked=false)
-				| Paper
-
-			//-div
-				//-input(type="checkbox", name="rememberme")
-				//-span.label Remember Me
+				
+				- var options = {"Supplier":"Supplier", "Paper":"Paper"}
+					select(name="project", id="project")
+						each option, key in options
+							option(value=key) #{option}
 			div#editEvaluationSubmit
 				input(type="submit", value="New Evaluation")
