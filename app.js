@@ -10,8 +10,6 @@ var routes = require('./routes');
 
 var http = require('http');
 var path = require('path');
-var EvaluationProvider = require('./evaluationprovider').EvaluationProvider;
-var StudentProvider = require('./studentprovider').StudentProvider;
 
 // ROUTES
 var user = require('./routes/user');
@@ -25,10 +23,10 @@ app.set('port', process.env.PORT || 3002);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
-app.use(express.logger('dev'));
-//app.use(express.logger());
+//app.use(express.logger('dev'));
+app.use(express.logger());
 app.use(express.cookieParser());
-app.use(express.session({ secret: 'keyboard cat' })); // CHANGE THIS!
+app.use(express.session({ secret: 'keyboard cat' })); // TODO : CHANGE THIS!
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
@@ -50,9 +48,9 @@ app.configure(function(){
 // ROUTES
 app.get('/', routes.index);
 
-// TODO Adapt all routes to the new student model
-app.get('/student', student.list);
-app.get('/student/all', student.list);
+// TODO Adapt all student routes to the new student model
+//app.get('/student', student.list);
+//app.get('/student/all', student.list);
 //app.get('/student/new', student.create); // TODO Adapt to new model
 //app.post('/student/save', student.save); // TODO Adapt to new model
 //app.get('/student/:ucid', student.find); // TODO Adapt to new model
@@ -63,7 +61,7 @@ app.post('/user/authenticate', user.authenticate);
 app.get('/evaluation/new', evaluation.create);
 app.post('/evaluation/new', evaluation.save);
 
-app.get('/evaluation/all', evaluation.list);
+//app.get('/evaluation/all', evaluation.list);
 
 
 app.get("*", function(request, response, next) {

@@ -2,13 +2,15 @@ var mongoose = require('mongoose');
 
 var Student = mongoose.model('Student');
 
+var utils = require('../utils');
+
 exports.authenticate = function(req, res) {
+	utils.logRequest(req);
 	// Redirect to new evaluation form if info provided is from a valid student!
 	// What if is from an admin? :D
 	var params = {
 		'ucid' : req.body.ucid,
 		'email' : req.body.email
-		//, 'group.type':req.body.project
 	};
 
 	student = Student.find(params).select('_id name email group').populate({
@@ -16,8 +18,7 @@ exports.authenticate = function(req, res) {
 		model : 'Group',
 		match : {
 			type : req.body.project
-		}
-		,
+		},
 		select : '_id number type'
 	}).exec(function(err, students, count) {
 		if (err)
@@ -30,8 +31,17 @@ exports.authenticate = function(req, res) {
 			console.log('Group from user/authentication: ');
 			console.log(students[0]['group'][0]);
 			req.session.group = students[0]['group'][0];
-			console.log('Setting iteration = 1');
-			req.session.iteration = 1; // TODO: CHANGE THE WAY ITERATION IS BEING SET!
+			
+			if (req.body.project == "Supplier") {
+				console.log('Setting Supplier Project Iteration to 1');
+				req.session.iteration = 1;
+				// TODO: CHANGE THE WAY ITERATION IS BEING SET!
+			} else if (req.body.project == "Paper") {
+				console.log('Setting Paper Project Iteration to 0');
+				req.session.iteration = 0;
+				// TODO: CHANGE THE WAY ITERATION IS BEING SET!
+			}
+
 			res.redirect('/evaluation/new');
 		} else {
 			// TODO If students has more than one result... FUUUUUUUUUUUUUU~

@@ -41,7 +41,7 @@ mongoose.model('Group', groupSchema);
 mongoose.model('Evaluations', evaluationsSchema);
 mongoose.model('MemberEvaluation', memberEvaluationSchema);
 
-mongoose.connect('beast.marinhomoreira.com', 'student-test');
+mongoose.connect('localhost', 'such-test');
 
 var Student = mongoose.model('Student');
 var Group = mongoose.model('Group');

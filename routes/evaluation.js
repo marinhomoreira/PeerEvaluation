@@ -60,7 +60,11 @@ exports.save = function(req, res) {
 			console.log(err);
 		console.log("Saved evals:");
 		console.log(evalsS);
+		
 		// TODO : Send email
+		var email = require('../email');
+		email.sendConfirmationEmail(evalsS._id);
+		
 		res.render('evaluation_success');
 	});
 }
@@ -81,8 +85,7 @@ exports.list = function(req, res) {
 	}).exec(function(err, evals) {
 		if (err)
 			console.log(err.message);
-		console.log(evals);
-
+		//console.log(evals);
 		res.render('evaluation_all', {
 			title : 'Evaluations',
 			evaluations : evals

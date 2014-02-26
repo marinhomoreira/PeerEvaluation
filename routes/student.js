@@ -4,6 +4,8 @@ var Student = mongoose.model('Student');
 var Group = mongoose.model('Group');
 var Evaluations = mongoose.model('Evaluations');
 
+// TODO : Adapt this file for the new student model.
+
 exports.list = function(req, res){
 	logRequest(req);
 	Student.find().populate('group', 'number type').exec( function ( err, students, count ){
@@ -61,5 +63,5 @@ exports.findByGroupTypeAndNumber = function(req, res) {
 
 
 function logRequest(req) {
-	//console.log(new Date().format("yy-MM-dd h:mm:ss") +" "+ req.socket._peername.address + ":"+ req.socket._peername.port + " " + req.method + " " + req.url);
+	console.log(new Date().format("yy-MM-dd h:mm:ss") +" "+ req.socket._peername.address + ":"+ req.socket._peername.port + " " + req.method + " " + req.url);
 }
