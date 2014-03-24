@@ -93,3 +93,42 @@ exports.list = function(req, res) {
 	});
 
 }
+
+// Method to filter evaluations by group type (Supplier/Paper) and Iteration number
+exports.listByFilter = function(req, res) {
+	utils.logRequest(req);
+
+	projectType = req.params.projectType;
+	iterationNumber = req.params.iterationNumber;
+	
+	var filteredGroups = Group.find({'type':projectType}).exec(
+		function(err, groups) {
+			var evaluations = Evaluations.find({_group : {$in : groups}, iteration :iterationNumber }).populate({
+				path : 'memberEvaluation._evaluated',
+				model : 'Student',
+				select : 'name ucid'
+			}).populate({
+				path : '_group',
+				model : 'Group',
+			}).populate({
+				path : '_evaluator',
+				model : 'Student'
+			}).sort({
+				_group : 1
+			})
+			.exec(function(err, evals) {
+				if (err)
+					console.log(err.message);
+				res.render('evaluation_all', {
+					title : projectType,
+					evaluations : evals,
+					iteration : iterationNumber
+				});
+			});
+		
+		}
+	
+	);
+}
+
+

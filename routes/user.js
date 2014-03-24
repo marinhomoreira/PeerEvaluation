@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var Student = mongoose.model('Student');
 
 var utils = require('../utils');
+var config = require('../config/config');
 
 exports.authenticate = function(req, res) {
 	utils.logRequest(req);
@@ -33,12 +34,12 @@ exports.authenticate = function(req, res) {
 			req.session.group = students[0]['group'][0];
 			
 			if (req.body.project == "Supplier") {
-				console.log('Setting Supplier Project Iteration to 1');
-				req.session.iteration = 1;
+				console.log('Setting Supplier Project Iteration to ' + config.supplierIteration);
+				req.session.iteration = config.supplierIteration;
 				// TODO: CHANGE THE WAY ITERATION IS BEING SET!
 			} else if (req.body.project == "Paper") {
-				console.log('Setting Paper Project Iteration to 0');
-				req.session.iteration = 0;
+				console.log('Setting Paper Project Iteration to '+ config.paperIteration);
+				req.session.iteration = config.paperIteration;
 				// TODO: CHANGE THE WAY ITERATION IS BEING SET!
 			}
 

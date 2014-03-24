@@ -41,10 +41,11 @@ mongoose.model('Group', groupSchema);
 mongoose.model('Evaluations', evaluationsSchema);
 mongoose.model('MemberEvaluation', memberEvaluationSchema);
 
-mongoose.connect('localhost', 'such-test');
+var config = require('./config/config');
+
+mongoose.connect(config.dbUrl, config.dbName);
 
 var Student = mongoose.model('Student');
 var Group = mongoose.model('Group');
 var Evaluations = mongoose.model('Evaluations');
 var MemberEvaluation = mongoose.model('MemberEvaluation');
-

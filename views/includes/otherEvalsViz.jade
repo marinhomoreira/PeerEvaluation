@@ -1,0 +1,63 @@
+h2 Play here				
+.evaluations
+	table
+		thead
+			tr
+				th 
+				
+		tbody
+			- var rowNumber = 0
+			tr
+				- each evaluation in evaluations
+					- var evaluator = evaluation._evaluator
+					- var group = evaluation._group
+					- var mEvals = evaluation.memberEvaluation
+					td
+						p Iteration #{evaluation.iteration}
+						p Submitted in #{evaluation.date}
+						p Evaluator #{evaluator.name}
+						p #{group.type} Project - Group #{group.number}
+						- each mEval in mEvals
+							p #{mEval._evaluated.name} #{mEval.grade}
+							p #{mEval.comments} 
+
+h2 lalalala
+- each evaluation in evaluations
+	- var evaluator = evaluation._evaluator
+	- var group = evaluation._group
+	.evaluations
+		table
+			td
+				tr
+					td Submission date
+					td #{evaluation.date}
+				tr
+					td Evaluator
+					td #{evaluator.name}
+				tr
+					td Email
+					td #{evaluator.email}
+		
+				tr
+					td UCID
+					td #{evaluator.ucid}	
+				tr 
+					td Group Type
+					td #{group.type}
+				tr 
+					td Group Number
+					td #{group.number}
+				tr
+					td Iteration
+					td #{evaluation.iteration}
+			- var mEvals = evaluation.memberEvaluation
+				- each mEval in mEvals
+					tr
+						td Team member
+						td #{mEval._evaluated.name}
+					tr
+						td Grade
+						td #{mEval.grade}
+					tr
+						td Comments
+						td #{mEval.comments}
