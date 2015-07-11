@@ -1,0 +1,33 @@
+extends layout
+
+block content
+	h1 SENG403 - Add new student
+	
+	div.newEvaluation
+		form(method="post", action="/student/save")
+			div
+				h2 Add new student
+				div
+					span.label Full Name :
+					input(type="text", name="name", id="name")
+				div
+					span.label UCID :
+					input(type="text", name="ucid", id="ucid")
+				div
+					span.label Email :
+					input(type="text", name="email", id="evaluatorEmail")
+				div
+					span.label Group Number :
+					- var groupOptions = {"1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9"}
+					select(name="groupNumber", id="groupNumber")
+						each option, key in groupOptions
+							option(value=key) #{option}
+				div
+					span.label Group Type :
+					- var groupOptions = {"supplier":"Supplier","paper":"Paper"}
+					select(name="groupType", id="groupType")
+						each option, key in groupOptions
+							option(value=key) #{option}
+				
+				div#editEvaluationSubmit
+					input(type="submit", value="Submit")

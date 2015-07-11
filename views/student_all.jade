@@ -1,0 +1,23 @@
+extends layout
+
+block content
+	h1= title
+	p= students.length +" students"
+	
+	.evaluations
+		table
+			thead
+				tr
+					th 
+					
+			tbody
+				- var rowNumber = 0
+				tr
+					- each student in students
+						td
+							#{student}
+							//- rowNumber = rowNumber+1
+							//p #{rowNumber}
+							//- each value, key in student
+								//p <strong>#{key}:</strong> #{value}
+								//p #{value}

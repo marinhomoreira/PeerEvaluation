@@ -1,0 +1,18 @@
+div.newEvaluation
+	form(method="post")
+		div
+			h2 Evaluator: #{evaluator.name}
+			div <strong>All fields are mandatory.</strong>
+			- each student, key in students
+				h3 #{student.name}
+				div
+					span.label Grade :
+					- var options = {"A+": "A+", "A": "A", "A-": "A-", "B+": "B+", "B": "B", "B-": "B-", "C+":"C+", "C":"C", "C-":"C-", "D+":"D+", "D":"D", "F":"F"}
+					select(name="evaluations[#{student._id}][grade]", id="grade")
+						each option, key in options
+							option(value=key) #{option}
+				div
+					span.label Comments :
+					<textarea name="evaluations[#{student._id}][comments]" id="comments" cols="30" rows="5" class="form_text text-input shadow" title="Comments" onblur="if (this.innerHTML == '') {this.innerHTML = 'Comments';}" onfocus="if (this.innerHTML == 'Comments') {this.innerHTML = '';}"></textarea>
+			div#editEvaluationSubmit
+				input(type="submit", value="Submit")

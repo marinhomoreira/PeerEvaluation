@@ -1,0 +1,21 @@
+
+div.newEvaluation
+	if message
+		h2 #{message}
+	form(method="post", action="/user/authenticate")
+		div
+			div
+				span.label UCID :
+				input(type="text", name="ucid")
+			div
+				span.label email :
+				input(type="text", name="email")
+			div
+				span.label Project :
+				
+				- var options = {"Supplier":"Supplier", "Paper":"Paper"}
+					select(name="project", id="project")
+						each option, key in options
+							option(value=key) #{option}
+			div#editEvaluationSubmit
+				input(type="submit", value="New Evaluation")
